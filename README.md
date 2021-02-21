@@ -19,8 +19,8 @@
 
 ### Features
 
-- [ ] Cadastro de empresas
-- [ ] Cadastro de filiais
+- [X] Cadastro de empresas
+- [X] Cadastro de filiais
 - [X] Cadastro de equipamentos
     - [X] Cadastro de marcas de equipamentos
     - [X] Cadastro de tipos de equipamentos
