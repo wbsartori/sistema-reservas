@@ -92,6 +92,3 @@ admin.site.register(EmpFilial)
 admin.site.register(Equipamento)
 admin.site.register(Sala)
 admin.site.register(Veiculo)
-
-
-

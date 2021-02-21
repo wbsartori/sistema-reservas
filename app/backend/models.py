@@ -17,8 +17,8 @@ class AuthGroup(models.Model):
 
 
 class AuthGroupPermissions(models.Model):
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
-    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
+    group = models.ForeignKey(AuthGroup, on_delete=models.CASCADE)
+    permission = models.ForeignKey('AuthPermission', on_delete=models.CASCADE)
 
     class Meta:
         managed = False
@@ -28,7 +28,7 @@ class AuthGroupPermissions(models.Model):
 
 class AuthPermission(models.Model):
     name = models.CharField(max_length=255)
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
+    content_type = models.ForeignKey('DjangoContentType', on_delete=models.CASCADE)
     codename = models.CharField(max_length=100)
 
     class Meta:
@@ -55,8 +55,8 @@ class AuthUser(models.Model):
 
 
 class AuthUserGroups(models.Model):
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+    user = models.ForeignKey(AuthUser, on_delete=models.CASCADE)
+    group = models.ForeignKey(AuthGroup, on_delete=models.CASCADE)
 
     class Meta:
         managed = False
@@ -65,8 +65,8 @@ class AuthUserGroups(models.Model):
 
 
 class AuthUserUserPermissions(models.Model):
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
+    user = models.ForeignKey(AuthUser, on_delete=models.CASCADE)
+    permission = models.ForeignKey(AuthPermission, on_delete=models.CASCADE)
 
     class Meta:
         managed = False
@@ -76,7 +76,7 @@ class AuthUserUserPermissions(models.Model):
 
 class Cidade(models.Model):
     codigo_ibge = models.CharField(max_length=7, blank=True, null=True)
-    id_uf = models.ForeignKey('Estado', models.DO_NOTHING, db_column='id_uf', blank=True, null=True)
+    id_uf = models.ForeignKey('Estado', on_delete=models.CASCADE, db_column='id_uf', blank=True, null=True)
     cidade = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
@@ -84,7 +84,7 @@ class Cidade(models.Model):
         db_table = 'cidade'
 
     def __str__(self):
-        return self.codigo_ibge, self.cidade
+        return self.cidade
 
 
 class DjangoAdminLog(models.Model):
@@ -93,8 +93,8 @@ class DjangoAdminLog(models.Model):
     object_repr = models.CharField(max_length=200)
     action_flag = models.PositiveSmallIntegerField()
     change_message = models.TextField()
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    content_type = models.ForeignKey('DjangoContentType', on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey(AuthUser, on_delete=models.CASCADE)
 
     class Meta:
         managed = False
@@ -143,14 +143,13 @@ class Departamentos(models.Model):
 
 
 class EmpDepartamento(models.Model):
-    id_departamento = models.ForeignKey('self', models.DO_NOTHING, db_column='id_departamento', blank=True, null=True)
-    id_empresa = models.ForeignKey('EmpEmpresa', models.DO_NOTHING, db_column='id_empresa', blank=True, null=True)
-    id_filial = models.ForeignKey('EmpFilial', models.DO_NOTHING, db_column='id_filial', blank=True, null=True)
+    id_departamento = models.ForeignKey('Departamentos', on_delete=models.CASCADE, db_column='id_departamento', blank=True, null=True)
+    id_empresa = models.ForeignKey('EmpEmpresa', on_delete=models.CASCADE, db_column='id_empresa', blank=True, null=True)
+    id_filial = models.ForeignKey('EmpFilial', on_delete=models.CASCADE, db_column='id_filial', blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'emp_departamento'
-
 
 
 class EmpEmpresa(models.Model):
@@ -161,16 +160,18 @@ class EmpEmpresa(models.Model):
     numero = models.CharField(max_length=10, blank=True, null=True)
     bairro = models.CharField(max_length=50, blank=True, null=True)
     cep = models.CharField(max_length=8, blank=True, null=True)
-    cidade = models.ForeignKey(Cidade, models.DO_NOTHING, blank=True, null=True)
-    uf = models.ForeignKey('Estado', models.DO_NOTHING, blank=True, null=True)
+    cidade = models.ForeignKey('Cidade', on_delete=models.CASCADE, blank=True, null=True)
+    uf = models.ForeignKey('Estado', on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'emp_empresa'
 
+    def __str__(self):
+        return self.descricao
 
 class EmpFilial(models.Model):
-    id_empresa = models.ForeignKey(EmpEmpresa, models.DO_NOTHING, db_column='id_empresa', blank=True, null=True)
+    id_empresa = models.ForeignKey('EmpEmpresa', on_delete=models.CASCADE, db_column='id_empresa', blank=True, null=True)
     codigo = models.CharField(max_length=12, blank=True, null=True)
     descricao = models.CharField(max_length=80, blank=True, null=True)
     endereco = models.CharField(max_length=80, blank=True, null=True)
@@ -178,8 +179,8 @@ class EmpFilial(models.Model):
     numero = models.CharField(max_length=10, blank=True, null=True)
     bairro = models.CharField(max_length=50, blank=True, null=True)
     cep = models.CharField(max_length=8, blank=True, null=True)
-    id_cidade = models.ForeignKey(Cidade, models.DO_NOTHING, db_column='id_cidade', blank=True, null=True)
-    id_uf = models.ForeignKey('Estado', models.DO_NOTHING, db_column='id_uf', blank=True, null=True)
+    id_cidade = models.ForeignKey('Cidade', on_delete=models.CASCADE, db_column='id_cidade', blank=True, null=True)
+    id_uf = models.ForeignKey('Estado', on_delete=models.CASCADE, db_column='id_uf', blank=True, null=True)
 
     class Meta:
         managed = False
@@ -188,8 +189,8 @@ class EmpFilial(models.Model):
 
 class Equipamento(models.Model):
     descricao = models.CharField(max_length=100, blank=True, null=True)
-    id_tipo_equipamento = models.ForeignKey('EquipamentoTipo', models.DO_NOTHING, db_column='id_tipo_equipamento', blank=True, null=True)
-    id_equipamentos_marcas = models.ForeignKey('EquipamentoMarca', models.DO_NOTHING, db_column='id_equipamentos_marcas', blank=True, null=True)
+    id_tipo_equipamento = models.ForeignKey('EquipamentoTipo', on_delete=models.CASCADE, db_column='id_tipo_equipamento', blank=True, null=True)
+    id_equipamentos_marcas = models.ForeignKey('EquipamentoMarca', on_delete=models.CASCADE, db_column='id_equipamentos_marcas', blank=True, null=True)
     modelo = models.CharField(max_length=80, blank=True, null=True)
     numero_serie = models.CharField(max_length=50, blank=True, null=True)
     numero_patrimonio = models.CharField(max_length=20, blank=True, null=True)
@@ -233,15 +234,15 @@ class Estado(models.Model):
         db_table = 'estado'
 
     def __str__(self):
-        return self.descricao, self.uf
+        return self.descricao
 
 
 class Sala(models.Model):
-    id_empresa = models.ForeignKey(EmpEmpresa, models.DO_NOTHING, db_column='id_empresa', blank=True, null=True)
-    id_filial = models.ForeignKey(EmpFilial, models.DO_NOTHING, db_column='id_filial', blank=True, null=True)
+    id_empresa = models.ForeignKey('EmpEmpresa', on_delete=models.CASCADE, db_column='id_empresa', blank=True, null=True)
+    id_filial = models.ForeignKey('EmpFilial', on_delete=models.CASCADE, db_column='id_filial', blank=True, null=True)
     descricao = models.CharField(max_length=80, blank=True, null=True)
     capacidade = models.IntegerField(blank=True, null=True)
-    id_equipamentos = models.ForeignKey(Equipamento, models.DO_NOTHING, db_column='id_equipamentos', blank=True, null=True)
+    id_equipamentos = models.ForeignKey('Equipamento', on_delete=models.CASCADE, db_column='id_equipamentos', blank=True, null=True)
     status = models.IntegerField(blank=True, null=True)
 
     class Meta:
@@ -256,11 +257,11 @@ class Veiculo(models.Model):
     ano_fabricacao = models.CharField(max_length=12, blank=True, null=True)
     km_atual = models.IntegerField(blank=True, null=True)
     km_anterior = models.IntegerField(blank=True, null=True)
-    id_empresa = models.ForeignKey(EmpEmpresa, models.DO_NOTHING, db_column='id_empresa', blank=True, null=True)
-    id_filial = models.ForeignKey(EmpFilial, models.DO_NOTHING, db_column='id_filial', blank=True, null=True)
-    id_tipo_veiculo = models.ForeignKey('VeiculoTipoVeiculo', models.DO_NOTHING, db_column='id_tipo_veiculo', blank=True, null=True)
-    id_combustivel = models.ForeignKey('VeiculoTipoCombustivel', models.DO_NOTHING, db_column='id_combustivel', blank=True, null=True)
-    id_cores = models.ForeignKey('VeiculoCor', models.DO_NOTHING, db_column='id_cores', blank=True, null=True)
+    id_empresa = models.ForeignKey(EmpEmpresa, on_delete=models.CASCADE, db_column='id_empresa', blank=True, null=True)
+    id_filial = models.ForeignKey(EmpFilial, on_delete=models.CASCADE, db_column='id_filial', blank=True, null=True)
+    id_tipo_veiculo = models.ForeignKey('VeiculoTipoVeiculo', on_delete=models.CASCADE, db_column='id_tipo_veiculo', blank=True, null=True)
+    id_combustivel = models.ForeignKey('VeiculoTipoCombustivel', on_delete=models.CASCADE, db_column='id_combustivel', blank=True, null=True)
+    id_cores = models.ForeignKey('VeiculoCor', on_delete=models.CASCADE, db_column='id_cores', blank=True, null=True)
 
     class Meta:
         managed = False
@@ -290,7 +291,7 @@ class VeiculoMarca(models.Model):
 
 
 class VeiculoModelo(models.Model):
-    id_marca = models.ForeignKey(VeiculoMarca, models.DO_NOTHING, db_column='id_marca', blank=True, null=True)
+    id_marca = models.ForeignKey(VeiculoMarca, on_delete=models.CASCADE, db_column='id_marca', blank=True, null=True)
     descricao = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
