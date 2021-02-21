@@ -142,7 +142,7 @@ class Departamentos(models.Model):
         return self.descricao
 
 
-class EmpDepartamento(models.Model):
+class EmpDeFpartamento(models.Model):
     id_departamento = models.ForeignKey('Departamentos', on_delete=models.CASCADE, db_column='id_departamento', blank=True, null=True)
     id_empresa = models.ForeignKey('EmpEmpresa', on_delete=models.CASCADE, db_column='id_empresa', blank=True, null=True)
     id_filial = models.ForeignKey('EmpFilial', on_delete=models.CASCADE, db_column='id_filial', blank=True, null=True)
@@ -186,6 +186,8 @@ class EmpFilial(models.Model):
         managed = False
         db_table = 'emp_filial'
 
+    def __str__(self):
+        return self.descricao
 
 class Equipamento(models.Model):
     descricao = models.CharField(max_length=100, blank=True, null=True)
@@ -204,6 +206,8 @@ class Equipamento(models.Model):
         managed = False
         db_table = 'equipamento'
 
+    def __str__(self):
+        return self.descricao
 
 class EquipamentoMarca(models.Model):
     descricao = models.CharField(max_length=80, blank=True, null=True)
@@ -238,8 +242,8 @@ class Estado(models.Model):
 
 
 class Sala(models.Model):
-    id_empresa = models.ForeignKey('EmpEmpresa', on_delete=models.CASCADE, db_column='id_empresa', blank=True, null=True)
-    id_filial = models.ForeignKey('EmpFilial', on_delete=models.CASCADE, db_column='id_filial', blank=True, null=True)
+    id_empresa = models.ForeignKey(EmpEmpresa, on_delete=models.CASCADE, db_column='id_empresa', blank=True, null=True)
+    id_filial = models.ForeignKey(EmpFilial, on_delete=models.CASCADE, db_column='id_filial', blank=True, null=True)
     descricao = models.CharField(max_length=80, blank=True, null=True)
     capacidade = models.IntegerField(blank=True, null=True)
     id_equipamentos = models.ForeignKey('Equipamento', on_delete=models.CASCADE, db_column='id_equipamentos', blank=True, null=True)
@@ -249,6 +253,8 @@ class Sala(models.Model):
         managed = False
         db_table = 'sala'
 
+    def __str__(self):
+        return self.descricao
 
 class Veiculo(models.Model):
     placa = models.CharField(max_length=10, blank=True, null=True)
@@ -256,12 +262,13 @@ class Veiculo(models.Model):
     renavam = models.CharField(max_length=20, blank=True, null=True)
     ano_fabricacao = models.CharField(max_length=12, blank=True, null=True)
     km_atual = models.IntegerField(blank=True, null=True)
-    km_anterior = models.IntegerField(blank=True, null=True)
     id_empresa = models.ForeignKey(EmpEmpresa, on_delete=models.CASCADE, db_column='id_empresa', blank=True, null=True)
     id_filial = models.ForeignKey(EmpFilial, on_delete=models.CASCADE, db_column='id_filial', blank=True, null=True)
     id_tipo_veiculo = models.ForeignKey('VeiculoTipoVeiculo', on_delete=models.CASCADE, db_column='id_tipo_veiculo', blank=True, null=True)
     id_combustivel = models.ForeignKey('VeiculoTipoCombustivel', on_delete=models.CASCADE, db_column='id_combustivel', blank=True, null=True)
     id_cores = models.ForeignKey('VeiculoCor', on_delete=models.CASCADE, db_column='id_cores', blank=True, null=True)
+    id_marca = models.ForeignKey('VeiculoMarca', on_delete=models.CASCADE, db_column='id_marca', blank=True, null=True)
+    id_modelo = models.ForeignKey('VeiculoModelo', on_delete=models.CASCADE, db_column='id_modelo', blank=True, null=True)
 
     class Meta:
         managed = False

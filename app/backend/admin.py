@@ -75,6 +75,50 @@ class VeiculoTipoVeiculoAdmin(admin.ModelAdmin):
         queryset = queryset.order_by('descricao')
         return queryset
 
+class EmpEmpresaAdmin(admin.ModelAdmin):
+
+    list_display = ('codigo', 'descricao','endereco','numero','bairro','cep','cidade','uf')
+
+    def get_queryset(self, request):
+        queryset = super(EmpEmpresaAdmin, self).get_queryset(request)
+        queryset = queryset.order_by('descricao')
+        return queryset
+
+
+class EmpFilialAdmin(admin.ModelAdmin):
+
+    list_display = ('codigo', 'descricao','endereco','numero','bairro','cep','id_cidade','id_uf')
+
+    def get_queryset(self, request):
+        queryset = super(EmpFilialAdmin, self).get_queryset(request)
+        queryset = queryset.order_by('descricao')
+        return queryset
+
+
+class EquipamentoAdmin(admin.ModelAdmin):
+
+    def get_queryset(self, request):
+        queryset = super(EquipamentoAdmin, self).get_queryset(request)
+        queryset = queryset.order_by('descricao')
+        return queryset
+
+
+class SalaAdmin(admin.ModelAdmin):
+
+    def get_queryset(self, request):
+        queryset = super(SalaAdmin, self).get_queryset(request)
+        queryset = queryset.order_by('descricao')
+        return queryset
+
+
+# class VeiculoAdmin(admin.ModelAdmin):
+#
+#     def get_queryset(self, request):
+#         queryset = super(VeiculoAdmin, self).get_queryset(request)
+#         queryset = queryset.order_by('descricao')
+#         return queryset
+
+
 admin.site.register(Cidade, cidadeAdmin)
 admin.site.register(Estado, EstadoAdmin)
 admin.site.register(Departamentos, departamentoAdmin)
@@ -85,10 +129,8 @@ admin.site.register(VeiculoMarca, VeiculoMarcaAdmin)
 admin.site.register(VeiculoModelo, VeiculoModeloAdmin)
 admin.site.register(VeiculoTipoCombustivel,VeiculoTipoCombustivelAdmin)
 admin.site.register(VeiculoTipoVeiculo,VeiculoTipoVeiculoAdmin)
-
-admin.site.register(EmpDepartamento)
-admin.site.register(EmpEmpresa)
-admin.site.register(EmpFilial)
+admin.site.register(EmpEmpresa, EmpEmpresaAdmin)
+admin.site.register(EmpFilial, EmpFilialAdmin)
 admin.site.register(Equipamento)
-admin.site.register(Sala)
+admin.site.register(Sala, SalaAdmin)
 admin.site.register(Veiculo)
