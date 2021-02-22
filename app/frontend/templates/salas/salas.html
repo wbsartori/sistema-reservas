@@ -1,8 +1,10 @@
 {% extends 'layout.html'%}
 
 {% block content %}
-    <h1>Salas</h1>
-    <hr>
+<h4 class="mt-5">Salas</h4>
+<hr class="bg-dark">
+<a href="{% url 'novo_sala' %}" class="btn btn-padrao-reservas">Reservar</a>
+<hr class="bg-dark">
 <div class="container-fluid">
  <div class="row mt-5">
             <table class="table table-striped">

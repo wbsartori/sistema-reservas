@@ -16,3 +16,15 @@ def veiculo(request):
 
 def multiplo(request):
     return render(request, 'reservas/multiplos.html')
+
+def novo_equip(request):
+    return render(request,'equipamentos/novo_equip.html')
+
+def novo_sala(request):
+    return render(request,'salas/novo_sala.html')
+
+def novo_multiplo(request):
+    return render(request,'reservas/novo_multiplos.html')
+
+def novo_veiculo(request):
+    return render(request,'veiculos/novo_veiculos.html')
