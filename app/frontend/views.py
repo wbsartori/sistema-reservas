@@ -1,6 +1,7 @@
 from django.shortcuts import render
+from backend.models import Reserva
 
-# Create your views here.
+from .forms import ReservarEquipamentoForm
 
 def index(request):
     return render(request, 'home/index.html')
@@ -18,7 +19,15 @@ def multiplo(request):
     return render(request, 'reservas/multiplos.html')
 
 def novo_equip(request):
-    return render(request,'equipamentos/novo_equip.html')
+    form = ReservarEquipamentoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+
+    context = {
+        'form': form
+    }
+    return render(request,'equipamentos/novo_equip.html', context)
+
 
 def novo_sala(request):
     return render(request,'salas/novo_sala.html')

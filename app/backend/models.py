@@ -7,6 +7,7 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
+from datetime import datetime
 
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150)
@@ -142,7 +143,7 @@ class Departamentos(models.Model):
         return self.descricao
 
 
-class EmpDeFpartamento(models.Model):
+class EmpDepartamento(models.Model):
     id_departamento = models.ForeignKey('Departamentos', on_delete=models.CASCADE, db_column='id_departamento', blank=True, null=True)
     id_empresa = models.ForeignKey('EmpEmpresa', on_delete=models.CASCADE, db_column='id_empresa', blank=True, null=True)
     id_filial = models.ForeignKey('EmpFilial', on_delete=models.CASCADE, db_column='id_filial', blank=True, null=True)
@@ -328,3 +329,29 @@ class VeiculoTipoVeiculo(models.Model):
 
     def __str__(self):
         return self.descricao
+
+
+class Horario(models.Model):
+    descricao = models.CharField(max_length=10, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'horario'
+
+    def __str__(self):
+        return self.descricao
+
+
+class Reserva(models.Model):
+    id_usuario = models.ForeignKey('AuthUser', models.DO_NOTHING, db_column='id_usuario')
+    data_inicio = models.DateField()
+    data_final = models.DateField()
+    id_horario = models.ForeignKey('Horario', models.DO_NOTHING, db_column='id_horario')
+    id_equipamento = models.ForeignKey('Equipamento', models.DO_NOTHING, db_column='id_equipamento', blank=True, null=True)
+    id_sala = models.ForeignKey('Sala', models.DO_NOTHING, db_column='id_sala', blank=True, null=True)
+    id_veiculo = models.ForeignKey('Veiculo', models.DO_NOTHING, db_column='id_veiculo', blank=True, null=True)
+    observacoes = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'reserva'

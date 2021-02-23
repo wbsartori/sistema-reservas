@@ -110,14 +110,19 @@ class SalaAdmin(admin.ModelAdmin):
         queryset = queryset.order_by('descricao')
         return queryset
 
+class ReservaAdmin(admin.ModelAdmin):
 
-# class VeiculoAdmin(admin.ModelAdmin):
-#
-#     def get_queryset(self, request):
-#         queryset = super(VeiculoAdmin, self).get_queryset(request)
-#         queryset = queryset.order_by('descricao')
-#         return queryset
+    def get_queryset(self, request):
+        queryset = super(ReservaAdmin, self).get_queryset(request)
+        queryset = queryset.order_by('id_usuario')
+        return queryset
 
+class HorarioAdmin(admin.ModelAdmin):
+
+    def get_queryset(self, request):
+        queryset = super(HorarioAdmin, self).get_queryset(request)
+        queryset = queryset.order_by('descricao')
+        return queryset
 
 admin.site.register(Cidade, cidadeAdmin)
 admin.site.register(Estado, EstadoAdmin)
@@ -134,3 +139,5 @@ admin.site.register(EmpFilial, EmpFilialAdmin)
 admin.site.register(Equipamento)
 admin.site.register(Sala, SalaAdmin)
 admin.site.register(Veiculo)
+admin.site.register(Reserva,ReservaAdmin)
+admin.site.register(Horario, HorarioAdmin)
