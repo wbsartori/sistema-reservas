@@ -1,14 +1,61 @@
 {% extends 'layout.html'%}
+{% load crispy_forms_tags %}
 
 {% block content %}
+<div class="container">
     <h4 class="mt-5">Nova reserva de Sala</h4>
     <hr class="bg-dark">
-<a href="#" class="btn btn-padrao-reservas">Salvar</a>
-<a href="{% url 'sala' %}" class="btn btn-padrao-reservas">Cancelar</a>
-<hr class="bg-dark">
-<div class="container-fluid">
  <div class="row mt-5">
-
+     <div class="col-md-12">
+     <form>
+         <a href="#" class="btn btn-padrao-reservas">Salvar</a>
+        <a href="{% url 'sala' %}" class="btn btn-padrao-reservas">Cancelar</a>
+        <hr class="bg-dark">
+         <div class="row">
+             <div class="col-md-6">
+                 <div class="row">
+                     <div class="col-md-6">
+                         <div class="form-group">
+                            {{ form.id_usuario | as_crispy_field }}
+                        </div>
+                     </div>
+                     <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form.data_inicio | as_crispy_field }}
+                        </div>
+                     </div>
+                 </div>
+             </div>
+              <div class="col-md-6">
+                 <div class="row">
+                     <div class="col-md-6">
+                         <div class="form-group">
+                            {{ form.data_final | as_crispy_field }}
+                        </div>
+                     </div>
+                    <div class="col-md-6">
+                         <div class="form-group">
+                            {{ form.id_horario | as_crispy_field }}
+                        </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <hr>
+         <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form.id_sala | as_crispy_field }}
+                </div>
+            </div>
+             <div class="col-md-6">
+                <div class="form-group">
+                    {{ form.observacoes | as_crispy_field }}
+                </div>
+            </div>
+         </div>
+     </form>
+     </div>
  </div>
 </div>
 {% endblock %}
