@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from backend.models import Reserva
-
 from .forms import ReservarEquipamentoForm, ReservarSalaForm, ReservarVeiculoForm, ReservarMultiplosForm
 
 def index(request):
@@ -48,16 +47,21 @@ def novo_sala(request):
     return render(request,'salas/novo_sala.html', context)
 
 def novo_multiplo(request):
-    form = ReservarMultiplosForm(request.POST or None)
-    if form.is_valid():
-        form.save()
+    form = ReservarMultiplosForm()
+    context = {'form': form}
 
-    context = {
-        'form': form
-    }
+    if request.method == 'POST':
+        form = ReservarMultiplosForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request,'reservas/multiplos.html')
 
     return render(request,'reservas/novo_multiplos.html', context)
 
 
 def multiplo(request):
-    return render(request, 'reservas/multiplos.html')
+    reservas = Reserva.objects.all()
+    context = {
+        'reservas': reservas
+    }
+    return render(request, 'reservas/multiplos.html', context)

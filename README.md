@@ -26,8 +26,8 @@
     - [X] Cadastro de tipos de equipamentos
 - [ ] Cadastro de horários
 - [X] Cadastro de usuários
-- [ ] Cadastro de salas
-- [ ] Cadastro de veículos
+- [X] Cadastro de salas
+- [X] Cadastro de veículos
     - [X] Cadastro de cores de veículos
     - [X] Cadastro de marcas de veículos
     - [X] Cadastro de modelos de veículos
@@ -35,11 +35,15 @@
     - [X] Cadastro de tipo de veículos
 - [X] Painel Administrativo
 - [X] Permissões de Usuários
-- [ ] Reservas
+- [X] Reservas
   - [ ] Reservar Equipamento
   - [ ] Reservar Sala
   - [ ] Reservar Veículo
   - [ ] Reservar mais de um item
+- [ ] Cancelar Reserva (Cancela a Reserva liberando o item que foi reservado)
+- [ ] Time de Reserva (Contagem do tempo que foi estipulado na reserva)
+
+
 
 <h4 align="center"> 
 	🚧  Sistema de Reservas 🚀 Em construção...  🚧

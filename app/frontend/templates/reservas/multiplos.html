@@ -10,9 +10,8 @@
             <table class="table table-striped">
               <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Usuário</th>
                     <th scope="col">Reserva</th>
+                    <th scope="col">Usuário</th>
                     <th scope="col">Tipo</th>
                     <th scope="col">Data</th>
                     <th scope="col">Horário</th>
@@ -20,14 +19,27 @@
                 </tr>
               </thead>
               <tbody>
+
+              {% for reserva in reservas %}
                 <tr>
-                    <td scope="row">1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <th scope="col">
+                    <td scope="row">{{reserva.id}}</td>
+                    <td>{{reserva.id_usuario}}</td>
+                    {% if reserva.id_equipamento != '' %}
+                        <td>{{reserva.id_equipamento}}</td>
+
+                    {% elif reserva.id_sala != ''%}
+                        <td>{{reserva.id_sala}}</td>
+
+                    {% elif reserva.id_veiculo != ''%}
+                        <td>{{reserva.id_veiculo}}</td>
+
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                     <td>{{reserva.data_inicio}}</td>
+                     <td>{{reserva.data_final}}</td>
+
+                    <td scope="col">
                         <button class="btn btn-padrao-reservas" data-toggle="modal" data-target="#exampleModal">Visualizar</button>
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -54,9 +66,11 @@
                             </div>
                           </div>
                         </div>
-
-                    </th>
+                    </td>
+                    <td><button class="btn btn-danger-reservas">Cancelar</button></td>
+                    <td><button class="btn btn-warning-reservas"><span class="mr-2"><i class="bi bi-alarm"></i></span>00:00:00</button></td>
                 </tr>
+              {% endfor %}
               </tbody>
             </table>
         </div>
