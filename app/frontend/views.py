@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from backend.models import Reserva
+from backend.models import Reserva, AuthUser
 from .forms import ReservarEquipamentoForm, ReservarSalaForm, ReservarVeiculoForm, ReservarMultiplosForm
 
 def index(request):
@@ -61,7 +61,10 @@ def novo_multiplo(request):
 
 def multiplo(request):
     reservas = Reserva.objects.all()
+    usuarios = AuthUser.objects.all()
+
     context = {
-        'reservas': reservas
+        'reservas': reservas,
+        'usuarios': usuarios
     }
     return render(request, 'reservas/multiplos.html', context)

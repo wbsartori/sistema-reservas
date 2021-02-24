@@ -15,15 +15,18 @@
                     <th scope="col">Tipo</th>
                     <th scope="col">Data</th>
                     <th scope="col">Horário</th>
-                    <th scope="col">---</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
               </thead>
               <tbody>
 
               {% for reserva in reservas %}
+                  {% for usuario in usuarios %}
                 <tr>
-                    <td scope="row">{{reserva.id}}</td>
-                    <td>{{reserva.id_usuario}}</td>
+                    <td>{{reserva.id}}</td>
+                    <td>{{usuario.username}}</td>
                     {% if reserva.id_equipamento != '' and  reserva.id_sala != '' and reserva.id_veiculo != '' or  reserva.id_veiculo != None %}
                         <td>{{reserva.id_equipamento}}, {{reserva.id_sala}}, {{reserva.id_veiculo}}</td>
 
@@ -40,13 +43,13 @@
                      <td>{{reserva.data_final}}</td>
 
                     <td scope="col">
-                        <button class="btn btn-padrao-reservas" data-toggle="modal" data-target="#exampleModal">Visualizar</button>
+                        <button class="btn btn-padrao-reservas" data-toggle="modal" data-target="#exampleModal{{reserva.id}}">Visualizar</button>
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="exampleModal{{reserva.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Sistema de Reservas</h5>
+
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>
                                 </button>
@@ -55,18 +58,21 @@
                                 <div class="row mt-5">
                                      <div class="col-md-12">
                                      <form>
+                                         <h5 class="modal-title" id="exampleModalLabel">Detalhes da Reserva</h5>
                                         <hr class="bg-dark">
                                          <div class="row">
                                              <div class="col-md-6">
                                                  <div class="row">
                                                      <div class="col-md-6">
                                                          <div class="form-group">
-                                                             <input type="text" class="form-control" value="{{ reserva.id_usuario }}">
+                                                             <label for="">Usuário</label>
+                                                             <input type="text" class="form-control" value="{{ usuario.username }}" disabled>
                                                         </div>
                                                      </div>
                                                      <div class="col-md-6">
                                                         <div class="form-group">
-                                                            {{ reserva.data_inicio}}
+                                                            <label for="">Data Inicio</label>
+                                                             <input type="text" class="form-control" value="{{ reserva.data_inicio}}" disabled>
                                                         </div>
                                                      </div>
                                                  </div>
@@ -75,12 +81,14 @@
                                                  <div class="row">
                                                      <div class="col-md-6">
                                                          <div class="form-group">
-                                                            {{ reserva.data_final }}
+                                                             <label for="">Data Final</label>
+                                                             <input type="text" class="form-control" value="{{ reserva.data_final }}" disabled>
                                                         </div>
                                                      </div>
                                                     <div class="col-md-6">
                                                          <div class="form-group">
-                                                            {{ reserva.id_horario }}
+                                                             <label for="">Horário</label>
+                                                             <input type="text" class="form-control" value="{{ reserva.id_horario }}" disabled>
                                                         </div>
                                                      </div>
                                                  </div>
@@ -90,18 +98,22 @@
                                          <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    {{ reserva.id_equipamento }}
+                                                    <label for="">Equipamento</label>
+                                                    <input type="text" class="form-control" value="{{ reserva.id_equipamento }}" disabled>
                                                 </div>
                                                  <div class="form-group">
-                                                    {{ reserva.id_sala }}
+                                                     <label for="">Sala</label>
+                                                     <input type="text" class="form-control" value="{{ reserva.id_sala }}" disabled>
                                                 </div>
                                                  <div class="form-group">
-                                                    {{ reserva.id_veiculo }}
+                                                     <label for="">Veículo</label>
+                                                     <input type="text" class="form-control" value="{{ reserva.id_veiculo }}" disabled>
                                                 </div>
                                             </div>
                                              <div class="col-md-6">
                                                 <div class="form-group">
-                                                    {{ reserva.observacoes }}
+                                                    <label for="">Observacoes</label>
+                                                    <textarea class="form-control" rows="5" cols="5" disabled>{{ reserva.observacoes }}</textarea>
                                                 </div>
                                             </div>
                                          </div>
@@ -116,9 +128,10 @@
                           </div>
                         </div>
                     </td>
-                    <td><button class="btn btn-danger-reservas">Cancelar</button></td>
-                    <td><button class="btn btn-warning-reservas"><span class="mr-2"><i class="bi bi-alarm"></i></span>00:00:00</button></td>
+                    <td class="text-center"><button class="btn btn-danger-reservas">Cancelar</button></td>
+                    <td class="text-center"><button class="btn btn-warning-reservas"><span class="mr-2"><i class="bi bi-alarm"></i></span>00:00:00</button></td>
                 </tr>
+              {% endfor %}
               {% endfor %}
               </tbody>
             </table>
