@@ -1,0 +1,142 @@
+/*# sourceMappingURL=customizados.css.map */
+
+/**PERSONALIZAÇÃO DOS MODAIS**/
+
+.cor-titulos-modal{
+    background-color: #17a2b8;
+    color: #ffffff;
+}
+
+.modal-dialog{
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width:none !important;
+
+}
+
+.modal-dialog {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width:none !important;
+
+}
+
+.modal-dialog {
+    width: 100% !important;
+    height: 50% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width:none !important;
+
+}
+
+.modal-dialog{
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width:none !important;
+
+}
+
+.modal-content  {
+    height: auto !important;
+    min-height: 100% !important;
+    border-radius: 0 !important;
+    background-color: #ececec !important
+}
+
+.modal-header {
+    border-bottom: 1px solid #9ea2a2 !important;
+}
+
+.modal-footer  {
+    border-top: 1px solid #9ea2a2 !important;
+}
+
+
+/**PERSONALIZAÇÃO DAS TABELAS PARA MODO SCROLL**/
+.my-custom-scrollbar {
+    position: relative;
+    height: 200px;
+    overflow: auto;
+    }
+    .table-wrapper-scroll-y {
+    display: block;
+    }
+
+/**PERSONALIZAÇÃO DAS CORES PADROES DOS BOTOES**/
+.btn-padrao-reservas {
+    width: 100px;
+    background-color: #17a2b8;
+    color: white;
+    margin: 5px;
+}
+
+.btn-danger-reservas {
+    width: 100px;
+    background-color: #dc3545;
+    color: white;
+    margin: 5px;
+}
+
+.btn-padrao-reservas:hover {
+    width: 100px;
+    background-color: #0f7b8c;
+    color: white;
+    margin: 5px;
+}
+
+.btn-warning-reservas {
+    width: 110px;
+    background-color: #e8aa00;
+    color: white;
+    margin: 5px;
+}
+
+.btn-warning-reservas:hover {
+    width: 110px;
+    background-color: #c79304;
+    color: white;
+    margin: 5px;
+}
+
+.bg-cinza-escuro {
+    background-color: #5e5e5e;
+    color: white;
+    border-color: #5e5e5e;
+}
+
+
+#formulario_clientes input {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#formulario_clientes select {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#formulario_editar_clientes input {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#formulario_editar_clientes select {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#formulario_editar_produtos input {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#formulario_editar_produtos select {
+    font-size: 12px;
+    font-weight: bold;
+}
