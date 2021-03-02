@@ -1,12 +1,4 @@
-# This is an auto-generated Django model module.
-# You'll have to do the following manually to clean this up:
-#   * Rearrange models' order
-#   * Make sure each model has one field with primary_key=True
-#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
-#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
-# Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
-
 from datetime import datetime
 
 class AuthGroup(models.Model):
@@ -75,19 +67,6 @@ class AuthUserUserPermissions(models.Model):
         unique_together = (('user', 'permission'),)
 
 
-class Cidade(models.Model):
-    codigo_ibge = models.CharField(max_length=7, blank=True, null=True)
-    id_uf = models.ForeignKey('Estado', on_delete=models.CASCADE, db_column='id_uf', blank=True, null=True)
-    cidade = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'cidade'
-
-    def __str__(self):
-        return self.cidade
-
-
 class DjangoAdminLog(models.Model):
     action_time = models.DateTimeField()
     object_id = models.TextField(blank=True, null=True)
@@ -130,6 +109,19 @@ class DjangoSession(models.Model):
     class Meta:
         managed = False
         db_table = 'django_session'
+
+
+class Cidade(models.Model):
+    codigo_ibge = models.CharField(max_length=7, blank=True, null=True)
+    id_uf = models.ForeignKey('Estado', on_delete=models.CASCADE, db_column='id_uf', blank=True, null=True)
+    cidade = models.CharField(max_length=100, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'cidade'
+
+    def __str__(self):
+        return self.cidade
 
 
 class Departamentos(models.Model):
@@ -190,45 +182,6 @@ class EmpFilial(models.Model):
     def __str__(self):
         return self.descricao
 
-class Equipamento(models.Model):
-    descricao = models.CharField(max_length=100, blank=True, null=True)
-    id_tipo_equipamento = models.ForeignKey('EquipamentoTipo', on_delete=models.CASCADE, db_column='id_tipo_equipamento', blank=True, null=True)
-    id_equipamentos_marcas = models.ForeignKey('EquipamentoMarca', on_delete=models.CASCADE, db_column='id_equipamentos_marcas', blank=True, null=True)
-    modelo = models.CharField(max_length=80, blank=True, null=True)
-    numero_serie = models.CharField(max_length=50, blank=True, null=True)
-    numero_patrimonio = models.CharField(max_length=20, blank=True, null=True)
-    data_aquisicao = models.CharField(max_length=50, blank=True, null=True)
-    nota_compra = models.CharField(max_length=50, blank=True, null=True)
-    prazo_garantia_fabricante = models.CharField(max_length=50, blank=True, null=True)
-    prazo_garantia_loja = models.CharField(max_length=50, blank=True, null=True)
-    observacoes = models.CharField(max_length=50, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'equipamento'
-
-    def __str__(self):
-        return self.descricao
-
-class EquipamentoMarca(models.Model):
-    descricao = models.CharField(max_length=80, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'equipamento_marca'
-
-    def __str__(self):
-        return self.descricao
-
-class EquipamentoTipo(models.Model):
-    descricao = models.CharField(max_length=80, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'equipamento_tipo'
-
-    def __str__(self):
-        return self.descricao
 
 class Estado(models.Model):
     descricao = models.CharField(max_length=50, blank=True, null=True)
@@ -237,95 +190,6 @@ class Estado(models.Model):
     class Meta:
         managed = False
         db_table = 'estado'
-
-    def __str__(self):
-        return self.descricao
-
-
-class Sala(models.Model):
-    id_empresa = models.ForeignKey(EmpEmpresa, on_delete=models.CASCADE, db_column='id_empresa', blank=True, null=True)
-    id_filial = models.ForeignKey(EmpFilial, on_delete=models.CASCADE, db_column='id_filial', blank=True, null=True)
-    descricao = models.CharField(max_length=80, blank=True, null=True)
-    capacidade = models.IntegerField(blank=True, null=True)
-    id_equipamentos = models.ForeignKey('Equipamento', on_delete=models.CASCADE, db_column='id_equipamentos', blank=True, null=True)
-    status = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'sala'
-
-    def __str__(self):
-        return self.descricao
-
-class Veiculo(models.Model):
-    placa = models.CharField(max_length=10, blank=True, null=True)
-    modelo = models.CharField(max_length=50, blank=True, null=True)
-    renavam = models.CharField(max_length=20, blank=True, null=True)
-    ano_fabricacao = models.CharField(max_length=12, blank=True, null=True)
-    km_atual = models.IntegerField(blank=True, null=True)
-    id_empresa = models.ForeignKey(EmpEmpresa, on_delete=models.CASCADE, db_column='id_empresa', blank=True, null=True)
-    id_filial = models.ForeignKey(EmpFilial, on_delete=models.CASCADE, db_column='id_filial', blank=True, null=True)
-    id_tipo_veiculo = models.ForeignKey('VeiculoTipoVeiculo', on_delete=models.CASCADE, db_column='id_tipo_veiculo', blank=True, null=True)
-    id_combustivel = models.ForeignKey('VeiculoTipoCombustivel', on_delete=models.CASCADE, db_column='id_combustivel', blank=True, null=True)
-    id_cores = models.ForeignKey('VeiculoCor', on_delete=models.CASCADE, db_column='id_cores', blank=True, null=True)
-    id_marca = models.ForeignKey('VeiculoMarca', on_delete=models.CASCADE, db_column='id_marca', blank=True, null=True)
-    id_modelo = models.ForeignKey('VeiculoModelo', on_delete=models.CASCADE, db_column='id_modelo', blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'veiculo'
-
-
-class VeiculoCor(models.Model):
-    descricao = models.CharField(max_length=30, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'veiculo_cor'
-
-    def __str__(self):
-        return self.descricao
-
-
-class VeiculoMarca(models.Model):
-    descricao = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'veiculo_marca'
-
-    def __str__(self):
-        return self.descricao
-
-
-class VeiculoModelo(models.Model):
-    id_marca = models.ForeignKey(VeiculoMarca, on_delete=models.CASCADE, db_column='id_marca', blank=True, null=True)
-    descricao = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'veiculo_modelo'
-
-    def __str__(self):
-        return self.descricao
-
-class VeiculoTipoCombustivel(models.Model):
-    descricao = models.CharField(max_length=15, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'veiculo_tipo_combustivel'
-
-    def __str__(self):
-        return self.descricao
-
-
-class VeiculoTipoVeiculo(models.Model):
-    descricao = models.CharField(max_length=15, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'veiculo_tipo_veiculo'
 
     def __str__(self):
         return self.descricao
@@ -342,16 +206,3 @@ class Horario(models.Model):
         return self.descricao
 
 
-class Reserva(models.Model):
-    id_usuario = models.ForeignKey('AuthUser', models.DO_NOTHING, db_column='id_usuario')
-    data_inicio = models.DateField()
-    data_final = models.DateField()
-    id_horario = models.ForeignKey('Horario', models.DO_NOTHING, db_column='id_horario')
-    id_equipamento = models.ForeignKey('Equipamento', models.DO_NOTHING, db_column='id_equipamento', blank=True, null=True)
-    id_sala = models.ForeignKey('Sala', models.DO_NOTHING, db_column='id_sala', blank=True, null=True)
-    id_veiculo = models.ForeignKey('Veiculo', models.DO_NOTHING, db_column='id_veiculo', blank=True, null=True)
-    observacoes = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'reserva'

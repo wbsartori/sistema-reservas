@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'backend',
     'frontend',
+    'equipamento',
+    'sala',
+    'reserva',
+    'veiculo',
     'crispy_forms',
     'bootstrap_datepicker_plus',
 ]

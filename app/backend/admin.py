@@ -9,6 +9,7 @@ class EstadoAdmin(admin.ModelAdmin):
         queryset = queryset.order_by('descricao')
         return queryset
 
+
 class cidadeAdmin(admin.ModelAdmin):
     list_display = ('codigo_ibge','cidade')
 
@@ -25,55 +26,6 @@ class departamentoAdmin(admin.ModelAdmin):
         queryset = queryset.order_by('descricao')
         return queryset
 
-class EquipamentoMarcaAdmin(admin.ModelAdmin):
-
-    def get_queryset(self, request):
-        queryset = super(EquipamentoMarcaAdmin, self).get_queryset(request)
-        queryset = queryset.order_by('descricao')
-        return queryset
-
-class EquipamentoTipoAdmin(admin.ModelAdmin):
-
-    def get_queryset(self, request):
-        queryset = super(EquipamentoTipoAdmin, self).get_queryset(request)
-        queryset = queryset.order_by('descricao')
-        return queryset
-
-class VeiculoCorAdmin(admin.ModelAdmin):
-
-    def get_queryset(self, request):
-        queryset = super(VeiculoCorAdmin, self).get_queryset(request)
-        queryset = queryset.order_by('descricao')
-        return queryset
-
-class VeiculoMarcaAdmin(admin.ModelAdmin):
-
-    def get_queryset(self, request):
-        queryset = super(VeiculoMarcaAdmin, self).get_queryset(request)
-        queryset = queryset.order_by('descricao')
-        return queryset
-
-
-class VeiculoModeloAdmin(admin.ModelAdmin):
-
-    def get_queryset(self, request):
-        queryset = super(VeiculoModeloAdmin, self).get_queryset(request)
-        queryset = queryset.order_by('descricao')
-        return queryset
-
-class VeiculoTipoCombustivelAdmin(admin.ModelAdmin):
-
-    def get_queryset(self, request):
-        queryset = super(VeiculoTipoCombustivelAdmin, self).get_queryset(request)
-        queryset = queryset.order_by('descricao')
-        return queryset
-
-class VeiculoTipoVeiculoAdmin(admin.ModelAdmin):
-
-    def get_queryset(self, request):
-        queryset = super(VeiculoTipoVeiculoAdmin, self).get_queryset(request)
-        queryset = queryset.order_by('descricao')
-        return queryset
 
 class EmpEmpresaAdmin(admin.ModelAdmin):
 
@@ -95,28 +47,6 @@ class EmpFilialAdmin(admin.ModelAdmin):
         return queryset
 
 
-class EquipamentoAdmin(admin.ModelAdmin):
-
-    def get_queryset(self, request):
-        queryset = super(EquipamentoAdmin, self).get_queryset(request)
-        queryset = queryset.order_by('descricao')
-        return queryset
-
-
-class SalaAdmin(admin.ModelAdmin):
-
-    def get_queryset(self, request):
-        queryset = super(SalaAdmin, self).get_queryset(request)
-        queryset = queryset.order_by('descricao')
-        return queryset
-
-class ReservaAdmin(admin.ModelAdmin):
-
-    def get_queryset(self, request):
-        queryset = super(ReservaAdmin, self).get_queryset(request)
-        queryset = queryset.order_by('id_usuario')
-        return queryset
-
 class HorarioAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
@@ -127,17 +57,6 @@ class HorarioAdmin(admin.ModelAdmin):
 admin.site.register(Cidade, cidadeAdmin)
 admin.site.register(Estado, EstadoAdmin)
 admin.site.register(Departamentos, departamentoAdmin)
-admin.site.register(EquipamentoMarca, EquipamentoMarcaAdmin)
-admin.site.register(EquipamentoTipo, EquipamentoTipoAdmin)
-admin.site.register(VeiculoCor, VeiculoCorAdmin)
-admin.site.register(VeiculoMarca, VeiculoMarcaAdmin)
-admin.site.register(VeiculoModelo, VeiculoModeloAdmin)
-admin.site.register(VeiculoTipoCombustivel,VeiculoTipoCombustivelAdmin)
-admin.site.register(VeiculoTipoVeiculo,VeiculoTipoVeiculoAdmin)
 admin.site.register(EmpEmpresa, EmpEmpresaAdmin)
 admin.site.register(EmpFilial, EmpFilialAdmin)
-admin.site.register(Equipamento)
-admin.site.register(Sala, SalaAdmin)
-admin.site.register(Veiculo)
-admin.site.register(Reserva,ReservaAdmin)
 admin.site.register(Horario, HorarioAdmin)

@@ -1,15 +1,16 @@
-{% extends 'layout.html'%}
+{% extends 'layout.html' %}
 {% load crispy_forms_tags %}
 
 {% block content %}
 <div class="container">
-    <h4 class="mt-5">Nova reserva de Sala</h4>
+    <h4 class="mt-5">Nova Reserva de Multipla</h4>
     <hr class="bg-dark">
  <div class="row mt-5">
      <div class="col-md-12">
-     <form>
-         <a href="#" class="btn btn-padrao-reservas">Salvar</a>
-        <a href="{% url 'sala' %}" class="btn btn-padrao-reservas">Cancelar</a>
+     <form action="" method="post">
+         {% csrf_token %}
+         <button class="btn btn-padrao-reservas" type="submit">Salvar</button>
+        <a href="{% url 'multiplo' %}" class="btn btn-padrao-reservas">Cancelar</a>
         <hr class="bg-dark">
          <div class="row">
              <div class="col-md-6">
@@ -45,7 +46,13 @@
          <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
+                    {{ form.id_equipamento | as_crispy_field }}
+                </div>
+                 <div class="form-group">
                     {{ form.id_sala | as_crispy_field }}
+                </div>
+                 <div class="form-group">
+                    {{ form.id_veiculo | as_crispy_field }}
                 </div>
             </div>
              <div class="col-md-6">
