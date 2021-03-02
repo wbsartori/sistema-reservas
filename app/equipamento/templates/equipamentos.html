@@ -27,15 +27,8 @@
                 <tr>
                     <td>{{reserva.id}}</td>
                     <td>{{usuario.username}}</td>
-                    {% if reserva.id_equipamento != '' and  reserva.id_sala != '' and reserva.id_veiculo != '' or  reserva.id_veiculo != None %}
-                        <td>{{reserva.id_equipamento}}, {{reserva.id_sala}}, {{reserva.id_veiculo}}</td>
-
-                    {% elif reserva.id_sala != ''%}
-                        <td>{{reserva.id_sala}}</td>
-
-                    {% elif reserva.id_veiculo != ''%}
-                        <td>{{reserva.id_veiculo}}</td>
-
+                    {% if reserva.id_equipamento %}
+                        <td>{{reserva.id_equipamento}}</td>
                     {% else %}
                         <td></td>
                     {% endif %}

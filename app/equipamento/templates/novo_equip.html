@@ -8,8 +8,9 @@
     <hr class="bg-dark">
  <div class="row mt-5">
      <div class="col-md-12">
-     <form>
-         <a href="#" class="btn btn-padrao-reservas">Salvar</a>
+     <form action="" method="post">
+         {% csrf_token %}
+         <button class="btn btn-padrao-reservas" type="submit">Salvar</button>
         <a href="{% url 'equipamento' %}" class="btn btn-padrao-reservas">Cancelar</a>
         <hr class="bg-dark">
          <div class="row">
