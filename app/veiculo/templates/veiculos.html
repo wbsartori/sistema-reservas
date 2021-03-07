@@ -24,23 +24,13 @@
 
               {% for reserva in reservas %}
                   {% for usuario in usuarios %}
-                <tr>
-                    <td>{{reserva.id}}</td>
-                    <td>{{usuario.username}}</td>
-                    {% if reserva.id_equipamento != '' and  reserva.id_sala != '' and reserva.id_veiculo != '' or  reserva.id_veiculo != None %}
-                        <td>{{reserva.id_equipamento}}, {{reserva.id_sala}}, {{reserva.id_veiculo}}</td>
+                    {% if reserva.id_equipamento == null and reserva.id_sala == null %}
+                        <tr>
+                            <td>{{reserva.id}}</td>
+                            <td>{{usuario.username}}</td>
 
-                    {% elif reserva.id_sala != ''%}
-                        <td>{{reserva.id_sala}}</td>
-
-                    {% elif reserva.id_veiculo != ''%}
-                        <td>{{reserva.id_veiculo}}</td>
-
-                    {% else %}
-                        <td></td>
-                    {% endif %}
-                     <td>{{reserva.data_inicio}}</td>
-                     <td>{{reserva.data_final}}</td>
+                            <td>{{reserva.data_inicio}}</td>
+                            <td>{{reserva.data_final}}</td>
 
                     <td scope="col">
                         <button class="btn btn-padrao-reservas" data-toggle="modal" data-target="#exampleModal{{reserva.id}}">Visualizar</button>
@@ -98,16 +88,8 @@
                                          <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="">Equipamento</label>
-                                                    <input type="text" class="form-control" value="{{ reserva.id_equipamento }}" disabled>
-                                                </div>
-                                                 <div class="form-group">
-                                                     <label for="">Sala</label>
-                                                     <input type="text" class="form-control" value="{{ reserva.id_sala }}" disabled>
-                                                </div>
-                                                 <div class="form-group">
-                                                     <label for="">Veículo</label>
-                                                     <input type="text" class="form-control" value="{{ reserva.id_veiculo }}" disabled>
+                                                    <label for="">Veículo</label>
+                                                    <input type="text" class="form-control" value="{{ reserva.id_veiculo }}" disabled>
                                                 </div>
                                             </div>
                                              <div class="col-md-6">
@@ -131,8 +113,11 @@
                     <td class="text-center"><button class="btn btn-danger-reservas">Cancelar</button></td>
                     <td class="text-center"><button class="btn btn-warning-reservas"><span class="mr-2"><i class="bi bi-alarm"></i></span>00:00:00</button></td>
                 </tr>
-              {% endfor %}
-              {% endfor %}
+                      {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+
+
               </tbody>
             </table>
         </div>

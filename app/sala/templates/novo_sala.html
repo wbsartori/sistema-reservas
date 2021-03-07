@@ -9,9 +9,11 @@
      <div class="col-md-12">
      <form action="" method="post">
          {% csrf_token %}
+
          <button class="btn btn-padrao-reservas" type="submit">Salvar</button>
         <a href="{% url 'sala' %}" class="btn btn-padrao-reservas">Cancelar</a>
-        <hr class="bg-dark">
+
+         <hr class="bg-dark">
          <div class="row">
              <div class="col-md-6">
                  <div class="row">

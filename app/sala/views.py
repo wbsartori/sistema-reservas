@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from backend.models import AuthUser
 from reserva.models import Reserva
 
@@ -24,6 +25,6 @@ def novo_sala(request):
         form = ReservarSalaForm(request.POST)
         if form.is_valid():
             form.save()
-        return render(request, 'salas.html', context)
-
-    return render(request, 'novo_sala.html', context)
+        return HttpResponseRedirect('sala.html')
+    else:
+        return render(request, 'novo_sala.html', context)

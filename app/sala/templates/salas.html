@@ -24,14 +24,11 @@
 
               {% for reserva in reservas %}
                   {% for usuario in usuarios %}
+              {% if reserva.id_equipamento == null and reserva.id_veiculo == null %}
                 <tr>
                     <td>{{reserva.id}}</td>
                     <td>{{usuario.username}}</td>
-                    {% if reserva.id_equipamento %}
-                        <td>{{reserva.id_equipamento}}</td>
-                    {% else %}
-                        <td></td>
-                    {% endif %}
+                        <td>{{reserva.id_sala}}</td>
                      <td>{{reserva.data_inicio}}</td>
                      <td>{{reserva.data_final}}</td>
 
@@ -116,7 +113,9 @@
                     <td class="text-center"><button class="btn btn-danger-reservas">Cancelar</button></td>
                     <td class="text-center"><button class="btn btn-warning-reservas"><span class="mr-2"><i class="bi bi-alarm"></i></span>00:00:00</button></td>
                 </tr>
+                      {% endif %}
               {% endfor %}
+
               {% endfor %}
               </tbody>
             </table>
