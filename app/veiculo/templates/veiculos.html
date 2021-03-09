@@ -6,6 +6,15 @@
 <a href="{% url 'novo_veiculo' %}" class="btn btn-padrao-reservas">Reservar</a>
 <hr class="bg-dark">
 <div class="container-fluid">
+{% if messages %}
+    <ul class="messagelist">
+        {% for message in messages %}
+            <li {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
+            {{ message }}
+            </li>
+        {% endfor   %}
+    </ul>
+{% endif %}
  <div class="row mt-5">
             <table class="table table-striped">
               <thead>
@@ -24,100 +33,100 @@
 
               {% for reserva in reservas %}
                   {% for usuario in usuarios %}
-                    {% if reserva.id_equipamento == null and reserva.id_sala == null %}
-                        <tr>
-                            <td>{{reserva.id}}</td>
-                            <td>{{usuario.username}}</td>
+                      {% for ve in veiculo %}
+                          {% if reserva.id_equipamento == null and reserva.id_sala == null %}
+                            <tr>
+                                <td>{{reserva.id}}</td>
+                                <td>{{usuario.username}}</td>
+                                <td>{{ve.modelo}}</td>
+                                <td>{{reserva.data_inicio}}</td>
+                                <td>{{reserva.data_final}}</td>
 
-                            <td>{{reserva.data_inicio}}</td>
-                            <td>{{reserva.data_final}}</td>
+                                <td scope="col">
+                                    <button class="btn btn-padrao-reservas" data-toggle="modal" data-target="#exampleModal{{reserva.id}}">Visualizar</button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal{{reserva.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
 
-                    <td scope="col">
-                        <button class="btn btn-padrao-reservas" data-toggle="modal" data-target="#exampleModal{{reserva.id}}">Visualizar</button>
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal{{reserva.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <div class="row mt-5">
-                                     <div class="col-md-12">
-                                     <form>
-                                         <h5 class="modal-title" id="exampleModalLabel">Detalhes da Reserva</h5>
-                                        <hr class="bg-dark">
-                                         <div class="row">
-                                             <div class="col-md-6">
-                                                 <div class="row">
-                                                     <div class="col-md-6">
-                                                         <div class="form-group">
-                                                             <label for="">Usuário</label>
-                                                             <input type="text" class="form-control" value="{{ usuario.username }}" disabled>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+                                            <div class="row mt-5">
+                                                 <div class="col-md-12">
+                                                 <form>
+                                                     <h5 class="modal-title" id="exampleModalLabel">Detalhes da Reserva</h5>
+                                                    <hr class="bg-dark">
+                                                     <div class="row">
+                                                         <div class="col-md-6">
+                                                             <div class="row">
+                                                                 <div class="col-md-6">
+                                                                     <div class="form-group">
+                                                                         <label for="">Usuário</label>
+                                                                         <input type="text" class="form-control" value="{{ usuario.username }}" disabled>
+                                                                    </div>
+                                                                 </div>
+                                                                 <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="">Data Inicio</label>
+                                                                         <input type="text" class="form-control" value="{{ reserva.data_inicio}}" disabled>
+                                                                    </div>
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                          <div class="col-md-6">
+                                                             <div class="row">
+                                                                 <div class="col-md-6">
+                                                                     <div class="form-group">
+                                                                         <label for="">Data Final</label>
+                                                                         <input type="text" class="form-control" value="{{ reserva.data_final }}" disabled>
+                                                                    </div>
+                                                                 </div>
+                                                                <div class="col-md-6">
+                                                                     <div class="form-group">
+                                                                         <label for="">Horário</label>
+                                                                         <input type="text" class="form-control" value="{{ reserva.id_horario }}" disabled>
+                                                                    </div>
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                     <hr>
+                                                     <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="">Veículo</label>
+                                                                <input type="text" class="form-control" value="{{ reserva.id_veiculo }}" disabled>
+                                                            </div>
+                                                        </div>
+                                                         <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="">Observacoes</label>
+                                                                <textarea class="form-control" rows="5" cols="5" disabled>{{ reserva.observacoes }}</textarea>
+                                                            </div>
                                                         </div>
                                                      </div>
-                                                     <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="">Data Inicio</label>
-                                                             <input type="text" class="form-control" value="{{ reserva.data_inicio}}" disabled>
-                                                        </div>
-                                                     </div>
+                                                 </form>
                                                  </div>
                                              </div>
-                                              <div class="col-md-6">
-                                                 <div class="row">
-                                                     <div class="col-md-6">
-                                                         <div class="form-group">
-                                                             <label for="">Data Final</label>
-                                                             <input type="text" class="form-control" value="{{ reserva.data_final }}" disabled>
-                                                        </div>
-                                                     </div>
-                                                    <div class="col-md-6">
-                                                         <div class="form-group">
-                                                             <label for="">Horário</label>
-                                                             <input type="text" class="form-control" value="{{ reserva.id_horario }}" disabled>
-                                                        </div>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                         </div>
-                                         <hr>
-                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="">Veículo</label>
-                                                    <input type="text" class="form-control" value="{{ reserva.id_veiculo }}" disabled>
-                                                </div>
-                                            </div>
-                                             <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="">Observacoes</label>
-                                                    <textarea class="form-control" rows="5" cols="5" disabled>{{ reserva.observacoes }}</textarea>
-                                                </div>
-                                            </div>
-                                         </div>
-                                     </form>
-                                     </div>
-                                 </div>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                    </td>
-                    <td class="text-center"><button class="btn btn-danger-reservas">Cancelar</button></td>
-                    <td class="text-center"><button class="btn btn-warning-reservas"><span class="mr-2"><i class="bi bi-alarm"></i></span>00:00:00</button></td>
-                </tr>
-                      {% endif %}
-                        {% endfor %}
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </td>
+                                <td class="text-center"><a href="{% url 'deletar_veiculo' reserva.id %}" class="btn btn-danger-reservas">Cancelar</a></td>
+                                <td class="text-center"><button class="btn btn-warning-reservas"><span class="mr-2"><i class="bi bi-alarm"></i></span>00:00:00</button></td>
+                            </tr>
+                        {% endif %}
+                      {% endfor %}
                     {% endfor %}
-
-
+                {% endfor %}
               </tbody>
             </table>
         </div>
