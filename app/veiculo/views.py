@@ -32,7 +32,7 @@ def novo_veiculo(request):
         if form.is_valid():
             form.save()
 
-        return render(request, 'veiculos.html', context)
+        return redirect('/veiculo')
 
     return render(request, 'novo_veiculos.html', context)
 
@@ -40,5 +40,5 @@ def deletar_veiculo(request, id):
     reserva = get_object_or_404(Reserva, pk=id)
     reserva.delete()
     messages.info(request, 'Reserva de veiculo deletada com sucesso!')
-    return redirect('veiculo')
+    return redirect('/veiculo')
 

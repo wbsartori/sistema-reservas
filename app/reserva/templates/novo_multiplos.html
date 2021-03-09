@@ -6,6 +6,11 @@
     <h4 class="mt-5">Nova Reserva de Multipla</h4>
     <hr class="bg-dark">
  <div class="row mt-5">
+     {% if messages %}
+        {% for message in messages %}
+            <p {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}</p>
+        {% endfor   %}
+{% endif %}
      <div class="col-md-12">
      <form action="" method="post">
          {% csrf_token %}

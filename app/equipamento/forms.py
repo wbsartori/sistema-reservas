@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from django import forms
-
 from reserva.models import Reserva
+
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -13,7 +13,7 @@ class ReservarEquipamentoForm(ModelForm):
 
     class Meta:
         model = Reserva
-        fields = ('id_usuario','data_inicio','data_final','id_horario','id_equipamento','id_sala','id_veiculo','observacoes')
+        fields = ('id_usuario','data_inicio','data_final','id_horario','id_equipamento','observacoes','tipo_reserva')
         date_input = DateInput()
         widgets = {
             'data_inicio' : DateInput(),

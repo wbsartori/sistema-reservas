@@ -23,9 +23,10 @@ def novo_multiplo(request):
         form = ReservarMultiplosForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, 'multiplos.html')
+            return redirect('/reserva')
+    else:
+        return render(request, 'novo_multiplos.html', context)
 
-    return render(request, 'novo_multiplos.html', context)
 
 
 def deletar_multiplos(request, id):

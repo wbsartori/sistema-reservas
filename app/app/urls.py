@@ -28,5 +28,5 @@ urlpatterns = [
     path('equipamento/', include(url_equip)),
     path('sala/', include(url_sala)),
     path('veiculo/', include(url_veiculo)),
-    path('reserva', include(url_reserva)),
+    path('reserva/', include(url_reserva)),
 ]

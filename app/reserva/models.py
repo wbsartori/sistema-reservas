@@ -6,6 +6,13 @@ from veiculo.models import Veiculo,VeiculoTipoVeiculo,VeiculoMarca,VeiculoCor,Ve
 
 # Create your models here.
 class Reserva(models.Model):
+    TipoReserva_choices = (
+        ("E", "Equipamento"),
+        ("S", "Sala"),
+        ("V", "Veiculo"),
+        ("M", "Multiplos")
+    )
+
     id_usuario = models.ForeignKey('backend.AuthUser', models.DO_NOTHING, db_column='id_usuario')
     data_inicio = models.DateField()
     data_final = models.DateField()
@@ -14,6 +21,7 @@ class Reserva(models.Model):
     id_sala = models.ForeignKey('sala.Sala', models.DO_NOTHING, db_column='id_sala')
     id_veiculo = models.ForeignKey('veiculo.Veiculo', models.DO_NOTHING, db_column='id_veiculo')
     observacoes = models.CharField(max_length=255, blank=True, null=True)
+    tipo_reserva = models.CharField(max_length=1, choices=TipoReserva_choices)
 
     class Meta:
         managed = False

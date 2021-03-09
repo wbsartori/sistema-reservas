@@ -9,12 +9,11 @@ class DateInput(forms.DateInput):
 class TextArea(forms.Textarea):
     text_area = 'textarea'
 
-
 class ReservarSalaForm(ModelForm):
 
     class Meta:
         model = Reserva
-        fields = ('id_usuario','data_inicio','data_final','id_horario','id_equipamento','id_sala','id_veiculo','observacoes')
+        fields = ('id_usuario','data_inicio','data_final','id_horario','id_sala','observacoes','tipo_reserva')
         date_input = DateInput()
         widgets = {
             'data_inicio' : DateInput(),
