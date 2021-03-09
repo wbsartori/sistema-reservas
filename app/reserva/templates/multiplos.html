@@ -6,6 +6,11 @@
 <a href="{% url 'novo_multiplo' %}" class="btn btn-padrao-reservas">Reservar</a>
 <hr class="bg-dark">
 <div class="container-fluid">
+{% if messages %}
+        {% for message in messages %}
+            <p {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}</p>
+        {% endfor   %}
+{% endif %}
  <div class="row mt-5">
             <table class="table table-striped">
               <thead>
@@ -27,18 +32,7 @@
                 <tr>
                     <td>{{reserva.id}}</td>
                     <td>{{usuario.username}}</td>
-                    {% if reserva.id_equipamento != '' and  reserva.id_sala != '' and reserva.id_veiculo != '' or  reserva.id_veiculo != None %}
-                        <td>{{reserva.id_equipamento}}, {{reserva.id_sala}}, {{reserva.id_veiculo}}</td>
-
-                    {% elif reserva.id_sala != ''%}
-                        <td>{{reserva.id_sala}}</td>
-
-                    {% elif reserva.id_veiculo != ''%}
-                        <td>{{reserva.id_veiculo}}</td>
-
-                    {% else %}
-                        <td></td>
-                    {% endif %}
+                    <td>{{reserva.id_equipamento}}, {{reserva.id_sala}}, {{reserva.id_veiculo}}</td>
                      <td>{{reserva.data_inicio}}</td>
                      <td>{{reserva.data_final}}</td>
 
@@ -128,7 +122,7 @@
                           </div>
                         </div>
                     </td>
-                    <td class="text-center"><button class="btn btn-danger-reservas">Cancelar</button></td>
+                    <td class="text-center"><a href="{% url 'deletar_multiplos' reserva.id %}" class="btn btn-danger-reservas">Cancelar</a></td>
                     <td class="text-center"><button class="btn btn-warning-reservas"><span class="mr-2"><i class="bi bi-alarm"></i></span>00:00:00</button></td>
                 </tr>
               {% endfor %}
