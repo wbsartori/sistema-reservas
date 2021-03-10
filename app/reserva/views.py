@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseRedirect
 from .forms import *
 from .models import *
 from backend.models import AuthUser
@@ -23,7 +24,7 @@ def novo_multiplo(request):
         form = ReservarMultiplosForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/reserva')
+            return HttpResponseRedirect('/reserva/')
     else:
         return render(request, 'novo_multiplos.html', context)
 

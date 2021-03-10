@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
-
 from reserva.models import Reserva
 from backend.models import AuthUser
+from django.http import HttpResponseRedirect
 from .models import VeiculoMarca, VeiculoModelo, Veiculo
 from .forms import ReservarVeiculoForm
 from django.contrib import messages
-# Create your views here.
+
 
 def veiculo(request):
     reservas = Reserva.objects.all()
@@ -31,10 +31,10 @@ def novo_veiculo(request):
         form = ReservarVeiculoForm(request.POST)
         if form.is_valid():
             form.save()
-
-        return redirect('/veiculo')
+            return HttpResponseRedirect('/veiculo/')
 
     return render(request, 'novo_veiculos.html', context)
+
 
 def deletar_veiculo(request, id):
     reserva = get_object_or_404(Reserva, pk=id)

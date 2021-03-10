@@ -30,7 +30,7 @@
               {% for reserva in reservas %}
                   {% for usuario in usuarios %}
                       {% for ve in veiculo %}
-                          {% if reserva.id_equipamento == null and reserva.id_sala == null %}
+                          {% if reserva.tipo_reserva == 'V' %}
                             <tr>
                                 <td>{{reserva.id}}</td>
                                 <td>{{usuario.username}}</td>

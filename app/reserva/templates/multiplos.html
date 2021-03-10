@@ -29,6 +29,7 @@
 
               {% for reserva in reservas %}
                   {% for usuario in usuarios %}
+                      {% if reserva.tipo_reserva == 'M' %}
                 <tr>
                     <td>{{reserva.id}}</td>
                     <td>{{usuario.username}}</td>
@@ -125,6 +126,7 @@
                     <td class="text-center"><a href="{% url 'deletar_multiplos' reserva.id %}" class="btn btn-danger-reservas">Cancelar</a></td>
                     <td class="text-center"><button class="btn btn-warning-reservas"><span class="mr-2"><i class="bi bi-alarm"></i></span>00:00:00</button></td>
                 </tr>
+                      {% endif %}
               {% endfor %}
               {% endfor %}
               </tbody>

@@ -14,7 +14,7 @@ class ReservarMultiplosForm(ModelForm):
 
     class Meta:
         model = Reserva
-        fields = ('id_usuario','data_inicio','data_final','id_horario','id_equipamento','id_sala','id_veiculo','observacoes')
+        fields = ('id_usuario','data_inicio','data_final','id_horario','id_equipamento','id_sala','id_veiculo','observacoes','tipo_reserva')
         date_input = DateInput()
         widgets = {
             'data_inicio' : DateInput(),

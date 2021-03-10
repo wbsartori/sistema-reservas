@@ -4,41 +4,54 @@
 <div class="container-fluid">
     <div class="row mt-5">
 
-         <div class="col-md-3">
-            <div class="card" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title text-center">Veiculos Reservados</h5>
-                <h2 class="card-subtitle mb-2 text-muted text-center">10</h2>
-              </div>
+        {% if equip %}
+            {% for eq in equip %}
+             <div class="col-md-3">
+                <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title text-center">Equipamentos Reservados</h5>
+                    <h2 class="card-subtitle mb-2 text-muted text-center">{{ eq.count_equip }}</h2>
+                  </div>
+                </div>
             </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="card" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title text-center">Equipamentos Reservados</h5>
-                <h2 class="card-subtitle mb-2 text-muted text-center">10</h2>
-              </div>
+            {% endfor %}
+        {% endif %}
+        {% if sala %}
+            {% for sal in sala %}
+             <div class="col-md-3">
+                <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title text-center">Salas Reservadas</h5>
+                    <h2 class="card-subtitle mb-2 text-muted text-center">{{ sal.count_sala }}</h2>
+                  </div>
+                </div>
             </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="card" style="width: 18rem;">
-              <div class="card-body text-center">
-                <h5 class="card-title">Salas Reservadas</h5>
-                <h2 class="card-subtitle mb-2 text-muted text-center">10</h2>
-              </div>
+            {% endfor %}
+        {% endif %}
+        {% if veiculo %}
+            {% for vei in veiculo %}
+             <div class="col-md-3">
+                <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title text-center">Veículos Reservados</h5>
+                    <h2 class="card-subtitle mb-2 text-muted text-center">{{ vei.count_veiculo }}</h2>
+                  </div>
+                </div>
             </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="card" style="width: 18rem;">
-              <div class="card-body text-center">
-                <h5 class="card-title">Reservas Ativas</h5>
-                <h2 class="card-subtitle mb-2 text-muted text-center">10</h2>
-              </div>
+            {% endfor %}
+        {% endif %}
+        {% if multiplo %}
+            {% for mult in multiplo %}
+             <div class="col-md-3">
+                <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title text-center">Multiplas Reservas</h5>
+                    <h2 class="card-subtitle mb-2 text-muted text-center">{{ mult.count_multiplo }}</h2>
+                  </div>
+                </div>
             </div>
-        </div>
+            {% endfor %}
+        {% endif %}
 
     </div>
 
@@ -50,11 +63,12 @@
              <table class="table table-striped">
               <thead>
                 <tr>
-                    <th scope="col">Reserva</th>
+                    <th scope="col">Nome</th>
                     <th scope="col">Usuário</th>
                     <th scope="col">Tipo</th>
-                    <th scope="col">Data</th>
                     <th scope="col">Horário</th>
+                    <th scope="col">Data Inicio</th>
+                    <th scope="col">Data Final</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
@@ -63,24 +77,13 @@
               <tbody>
 
               {% for reserva in reservas %}
-                  {% for usuario in usuarios %}
                 <tr>
-                    <td>{{reserva.id}}</td>
-                    <td>{{usuario.username}}</td>
-                    {% if reserva.id_equipamento != '' and  reserva.id_sala != '' and reserva.id_veiculo != '' or  reserva.id_veiculo != None %}
-                        <td>{{reserva.id_equipamento}}, {{reserva.id_sala}}, {{reserva.id_veiculo}}</td>
-
-                    {% elif reserva.id_sala != ''%}
-                        <td>{{reserva.id_sala}}</td>
-
-                    {% elif reserva.id_veiculo != ''%}
-                        <td>{{reserva.id_veiculo}}</td>
-
-                    {% else %}
-                        <td></td>
-                    {% endif %}
-                     <td>{{reserva.data_inicio}}</td>
-                     <td>{{reserva.data_final}}</td>
+                    <td>{{reserva.nome}}</td>
+                    <td>{{reserva.usuario}}</td>
+                    <td>{{reserva.descricao_tipo_reserva}}</td>
+                    <td>{{reserva.horario}}</td>
+                    <td>{{reserva.data_inicio}}</td>
+                    <td>{{reserva.data_final}}</td>
 
                     <td scope="col">
                         <button class="btn btn-padrao-reservas" data-toggle="modal" data-target="#exampleModal{{reserva.id}}">Visualizar</button>
@@ -168,10 +171,8 @@
                           </div>
                         </div>
                     </td>
-                    <td class="text-center"><button class="btn btn-danger-reservas">Cancelar</button></td>
                     <td class="text-center"><button class="btn btn-warning-reservas"><span class="mr-2"><i class="bi bi-alarm"></i></span>00:00:00</button></td>
                 </tr>
-              {% endfor %}
               {% endfor %}
               </tbody>
             </table>
