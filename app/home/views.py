@@ -17,16 +17,16 @@ def dictfetchall(cursor):
 class index(View):
     def get(self, request, *args, **kwargs):
         cursor = connection.cursor()
-        cursor.execute("select count(*) as count_equip from reserva where tipo_reserva = 'E'")
+        cursor.execute("select count(*) as count_equip from reserva where tipo_reserva = 'E' and substring(data_inicio,6,2) = substring(now(),6,2)")
         equip = dictfetchall(cursor)
 
-        cursor.execute("select count(*) as count_sala from reserva where tipo_reserva = 'S'")
+        cursor.execute("select count(*) as count_sala from reserva where tipo_reserva = 'S' and substring(data_inicio,6,2) = substring(now(),6,2)")
         sala = dictfetchall(cursor)
 
-        cursor.execute("select count(*) as count_veiculo from reserva where tipo_reserva = 'V'")
+        cursor.execute("select count(*) as count_veiculo from reserva where tipo_reserva = 'V' and substring(data_inicio,6,2) = substring(now(),6,2)")
         veiculo = dictfetchall(cursor)
 
-        cursor.execute("select count(*) as count_multiplo from reserva where tipo_reserva = 'M'")
+        cursor.execute("select count(*) as count_multiplo from reserva where tipo_reserva = 'M' and substring(data_inicio,6,2) = substring(now(),6,2)")
         multiplo = dictfetchall(cursor)
 
         cursor.execute(""" select auth_user.first_name as nome,
