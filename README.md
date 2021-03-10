@@ -24,7 +24,7 @@
 - [X] Cadastro de equipamentos
     - [X] Cadastro de marcas de equipamentos
     - [X] Cadastro de tipos de equipamentos
-- [ ] Cadastro de horários
+- [X] Cadastro de horários
 - [X] Cadastro de usuários
 - [X] Cadastro de salas
 - [X] Cadastro de veículos
@@ -36,12 +36,17 @@
 - [X] Painel Administrativo
 - [X] Permissões de Usuários
 - [X] Reservas
-  - [ ] Reservar Equipamento
-  - [ ] Reservar Sala
-  - [ ] Reservar Veículo
-  - [ ] Reservar mais de um item
-- [ ] Cancelar Reserva (Cancela a Reserva liberando o item que foi reservado)
-- [ ] Time de Reserva (Contagem do tempo que foi estipulado na reserva)
+  - [X] Reservar Equipamento
+  - [X] Reservar Sala
+  - [X] Reservar Veículo
+  - [X] Reservar mais de um item
+- [X] Cancelar Reserva (Remove a reserva adicionada)
+- [ ] Timer de Reserva (Contagem do tempo que foi estipulado na reserva)
+- [ ] Bloqueio de Item de Reserva (Bloqueia o item para nao ser mais reservado ate finalizar o periodo)
+- [ ] Autenticação de Usuario
+- [ ] Mostrar reservas apenas do usuario logado
+- [ ] Proibir exclusao de reserva que não seja do usuario da sessão
+- [ ] Dashboard de Reservas
 
 
 
