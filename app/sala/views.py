@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from backend.models import AuthUser
@@ -6,6 +7,7 @@ from django.contrib import messages
 from .forms import ReservarSalaForm
 
 
+@login_required
 def sala(request):
     reservas = Reserva.objects.all()
     usuarios = AuthUser.objects.all()
@@ -17,6 +19,7 @@ def sala(request):
     return render(request, 'salas.html', context)
 
 
+@login_required
 def novo_sala(request):
     form = ReservarSalaForm()
     context = {'form': form}
@@ -30,6 +33,7 @@ def novo_sala(request):
     return render(request, 'novo_sala.html', context)
 
 
+@login_required
 def deletar_sala(request, id):
     reserva = get_object_or_404(Reserva, pk=id)
     reserva.delete()

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from .forms import *
@@ -5,6 +6,8 @@ from .models import *
 from backend.models import AuthUser
 from django.contrib import messages
 
+
+@login_required
 def multiplo(request):
     reservas = Reserva.objects.all()
     usuarios = AuthUser.objects.all()
@@ -16,6 +19,7 @@ def multiplo(request):
     return render(request, 'multiplos.html', context)
 
 
+@login_required
 def novo_multiplo(request):
     form = ReservarMultiplosForm()
     context = {'form': form}
@@ -29,7 +33,7 @@ def novo_multiplo(request):
         return render(request, 'novo_multiplos.html', context)
 
 
-
+@login_required
 def deletar_multiplos(request, id):
     reserva = get_object_or_404(Reserva, pk=id)
     reserva.delete()

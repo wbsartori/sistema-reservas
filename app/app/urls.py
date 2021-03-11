@@ -25,6 +25,7 @@ from reserva import urls as url_reserva
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(index_url)),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('equipamento/', include(url_equip)),
     path('sala/', include(url_sala)),
     path('veiculo/', include(url_veiculo)),
