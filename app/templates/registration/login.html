@@ -4,10 +4,10 @@
 {% block content %}
 
 <div class="container">
-	<div class="d-flex justify-content-center h-100">
+	<div class="d-flex justify-content-center h-100 mt-5">
 		<div class="card">
 			<div class="card-header">
-				<h3>Sign In</h3>
+				<h3>Autenticação Sistema de Reservas</h3>
 			</div>
 			<div class="card-body">
 				<form method="post">
@@ -15,8 +15,7 @@
                     <input type="hidden" name="next" value="{{ next }}">
 
                     {{ form | crispy }}
-
-                    <button type="submit" class="btn-padrao-reservas">Entrar</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Entrar</button>
                 </form>
             </div>
         </div>
